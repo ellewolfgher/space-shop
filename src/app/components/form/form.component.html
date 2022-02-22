@@ -1,0 +1,123 @@
+<h1 class="text-white text-center mt-2">Carrinho</h1>
+
+<div class="container d-flex justify-content-center align-center mt-3 mb-4">
+  <form class="cont-float shadow-white-lg bg-light">
+    <div class="row my-3">
+        <label for="nome" class="col-sm-5 col-form-label">Nome do Cliente</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control" id="nome" placeholder="Digite o seu nome:">
+        </div>
+    </div>
+    <div class="row mb-3">
+
+        <div class="col-sm-6">
+          <label for="date" class="col-form-label">Data de Nascimento:</label>
+          <input type="date" class="form-control" id="date">
+        </div>
+
+
+        <div class="col-sm-6">
+          <label for="quantidade" class="col-form-label">Quantidade de produtos:</label>
+          <input type="number" class="form-control" id="quantidade" min="1" name="calcularPreco" [(ngModel)]="qntProd">
+        </div>
+        <div class="mt-1"> Valor total de produtos: {{qntProd * valor | currency:"BRL"}}</div>
+
+    </div>
+
+    <div class="row mb-3">
+
+        <!-- Tamanhos -->
+      <div class="col-sm-6">
+        <div>
+          <label class="col-form-label me-2">Tamanhos disponíveis:</label>
+            <select name="tamanhos" [(ngModel)]="tamanhos">
+                <option value="tam1">PP</option>
+                <option value="tam2">P</option>
+                <option value="tam3">M</option>
+                <option value="tam4">G</option>
+                <option value="tam5">GG</option>
+            </select>
+        </div>
+        <div [ngSwitch]="tamanhos">
+          <p *ngSwitchCase="'tam1'">
+            Tamanho PP selecionado.
+          </p>
+          <p *ngSwitchCase="'tam2'">
+            Tamanho P selecionado.
+          </p>
+          <p *ngSwitchCase="'tam3'">
+            Tamanho M selecionado.
+          </p>
+          <p *ngSwitchCase="'tam4'">
+            Tamanho G selecionado.
+          </p>
+          <p *ngSwitchCase="'tam5'">
+            Tamanho GG selecionado.
+          </p>
+          <p *ngSwitchDefault>
+            Escolha um tamanho.
+          </p>
+        </div>
+      </div>
+
+        <!-- Cores -->
+      <div class="col-sm-6">
+        <div>
+          <label class="col-form-label me-2">Cores disponíveis:</label>
+            <select name="cores" [(ngModel)]="cores">
+                <option value="cor1">Preta</option>
+                <option value="cor2">Branca</option>
+                <option value="cor3">Azul</option>
+                <option value="cor4">Cinza</option>
+            </select>
+        </div>
+        <div [ngSwitch]="cores">
+          <p *ngSwitchCase="'cor1'">
+            Cor preta selecionada.
+          </p>
+          <p *ngSwitchCase="'cor2'">
+            Cor branca selecionada.
+          </p>
+          <p *ngSwitchCase="'cor3'">
+            Cor azul selecionada.
+          </p>
+          <p *ngSwitchCase="'cor4'">
+            Cor cinza selecionada.
+          </p>
+          <p *ngSwitchDefault>
+            Escolha uma cor.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+
+      <div class="col-sm-5">
+        <label class="col-form-label me-3">Frete:</label>
+          <select name="frete" [(ngModel)]="frete" (blur)="calcularValor()">
+              <option value="frete1">Brasil</option>
+              <option value="frete2">Outro país</option>
+          </select>
+      </div>
+
+        <div [ngSwitch]="frete">
+          <p *ngSwitchCase="'frete1'">
+            Frete R$ 10,00. Valor total =  {{total | currency:"BRL"}}
+          </p>
+          <p *ngSwitchCase="'frete2'">
+            Frete R$ 30,00. Valor total = {{total | currency:"BRL"}}
+          </p>
+          <p *ngSwitchDefault>
+            Escolha um modelo de frete.
+          </p>
+        </div>
+
+
+  </div>
+    <div class="mb-3">
+        <button type="reset" class="btn btn-danger">Limpar</button>
+        <button type="submit" class="btn btn-primary mx-1" style="float: right;">Comprar</button>
+    </div>
+  </form>
+</div>
